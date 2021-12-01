@@ -1,0 +1,27 @@
+{% extends 'base_layout.html' %}
+
+{% block content %}
+    <h1>Article List</h1>
+    <div class='articles'>
+        <!--
+        Templates tags do python em curly braces => 
+        %python code: for%} // {data: info do DB}}
+        Como não sei quantos artigos terei, usarei um for + template tag
+        o for se refere ao views.py linha 10, 3º parameter as a dict
+        Para cada um dos artigos que forem renderizados aqui, lá da views
+        será exibido um div com um h2 e 2 p's com informações do title,
+        do body e do date (properties)
+        -->
+        {% for article in articles %}
+            <div class='article'>
+                <h2><a href="{% url 'articles:detail' article.slug %}">{{ article.title }}</a></h2>
+                <!--use a url in the articles name space, that is called detail
+                como essa url pede um slug, use o do article.slug e jogue na função
+                article_detail
+                -->
+                <p>{{ article.snippet }}</p>
+                <p>{{ article.date }}</p>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
